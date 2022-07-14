@@ -1,4 +1,4 @@
-const webpackCommonConfig = require("./webpack.common.js")["development"];
+const webpackCommonConfig = require("./webpack.common.js")("development");
 
 module.exports = {
   devServer: {
