@@ -40,6 +40,20 @@ module.exports = (webpackEnv) => {
             },
           ],
         },
+        {
+          // Loader for images
+          test: /\.(png|svg|jpg|jepg|gif)$/,
+          type: "asset",
+          generator: {
+            fileName: "image/[name].[contenthash:8][ext][query]",
+          },
+        },
+        {
+          // Loader for fonts
+          exclude:
+            /\.(js|mjs|ejs|jsx|ts|tsx|css|scss|sass|png|svg|jpg|jpeg|gif|html)$/i,
+          type: "asset/resource",
+        },
       ],
     },
     plugins: [
