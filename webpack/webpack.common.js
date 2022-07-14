@@ -10,10 +10,37 @@ module.exports = (webpackEnv) => {
     entry: "./src/index.js",
     output: {
       filename: "main.js",
-      path: path.resolve(__dirname, "dist"),
+      path: path.resolve(__dirname, "../dist"),
     },
     module: {
-      rules: [],
+      rules: [
+        {
+          test: /.css$/i,
+          use: [
+            "style-loader",
+            "css-loader",
+            {
+              // CSS compatibility for different browsers
+              loader: "postcss-loader",
+              options: {
+                postcssOptions: {
+                  plugins: [
+                    [
+                      "postcss-preset-env",
+                      {
+                        autoprefixer: {
+                          flexbox: "no-2009",
+                        },
+                        stage: 3,
+                      },
+                    ],
+                  ],
+                },
+              },
+            },
+          ],
+        },
+      ],
     },
     plugins: [
       new htmlWebpackPlugin({
