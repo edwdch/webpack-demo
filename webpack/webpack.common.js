@@ -54,6 +54,27 @@ module.exports = (webpackEnv) => {
             /\.(js|mjs|ejs|jsx|ts|tsx|css|scss|sass|png|svg|jpg|jpeg|gif|html)$/i,
           type: "asset/resource",
         },
+        {
+          test: /\.js$/,
+          use: [
+            {
+              loader: "babel-loader",
+              options: {
+                presets: ["@babel/preset-env"],
+                plugins: [
+                  [
+                    "@babel/plugin-transform-runtime",
+                    {
+                      helpers: true,
+                      regenerator: true,
+                      corejs: 3,
+                    },
+                  ],
+                ],
+              },
+            },
+          ],
+        },
       ],
     },
     plugins: [
